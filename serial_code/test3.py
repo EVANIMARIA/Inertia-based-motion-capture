@@ -1,6 +1,7 @@
 # -*- coding: utf-8-*-
-import serial
 import struct
+import serial
+
 
 ser = serial.Serial("/dev/sensor1", 115200, timeout=100)
 if not ser.isOpen:
@@ -41,7 +42,9 @@ while count != 0:
 
     count = count - 1
 
-with open('data_ac.txt', 'a+') as data_ac_f:
+erer = 3
+
+with open('data_ac'+str(erer)+'.txt', 'a+') as data_ac_f:
     for data_ac_f_index in range(len(raw_data_ac)):
         data_ac_f.write(str(raw_data_ac[data_ac_f_index]) + '\n')
 
