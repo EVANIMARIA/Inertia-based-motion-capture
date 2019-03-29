@@ -59,11 +59,11 @@ def serial_mode(sensor, count_out, order):
                     raw_data_an.append(raw_data_an_unit)
             # count = count - 1
         # time.sleep(1)
-
+    print("done!")
+    '''
     with open('data_ac' + str(order) + '.txt', 'w+') as data_ac_f:
         for data_ac_f_index in range(len(raw_data_ac)):
             data_ac_f.write(str(raw_data_ac[data_ac_f_index]) + '\n')
-
     with open('data_an' + str(order) + '.txt', 'w+') as data_an_f:
         for data_an_f_index in range(len(raw_data_an)):
             data_an_f.write(str(raw_data_an[data_an_f_index]) + '\n')
@@ -71,14 +71,47 @@ def serial_mode(sensor, count_out, order):
     with open('data_aw' + str(order) + '.txt', 'w+') as data_aw_f:
         for data_aw_f_index in range(len(raw_data_aw)):
             data_aw_f.write(str(raw_data_aw[data_aw_f_index]) + '\n')
+    '''
+    with open('data_ac_x' + str(order) + '.txt','a+') as data_ac_x_f,open('data_ac_y' + str(order) + '.txt','a+') as data_ac_y_f,open('data_ac_z' + str(order) + '.txt','a+') as data_ac_z_f:
+        for data_ac_index in raw_data_ac:
+            data_ac_keys = data_ac_index.keys()
+            for data_ac_keys_index in data_ac_keys:
+                if data_ac_keys_index == "raw_data_ac_x":
+                    data_ac_x_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
+                elif data_ac_keys_index == "raw_data_ac_y":
+                    data_ac_y_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
+                elif data_ac_keys_index == "raw_data_ac_z":
+                    data_ac_y_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
+    '''
+    with open('data_aw_x' + str(order) + '.txt','a+') as data_aw_x_f,open('data_aw_y' + str(order) + '.txt','a+') as data_aw_y_f,open('data_aw_z' + str(order) + '.txt','a+') as data_aw_z_f:    with open('data_aw_x' + str(order) + '.txt','a+') as data_aw_x_f,open('data_aw_y' + str(order) + '.txt','a+') as data_aw_y_f,open('data_aw_z' + str(order) + '.txt','a+') as data_aw_z_f:
+        for data_aw_index in raw_data_aw:
+            data_aw_keys = data_aw_index.keys()
+            for data_aw_keys_index in data_aw_keys:
+                if data_aw_keys_index == "raw_data_aw_x":
+                    data_aw_x_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
+                elif data_aw_keys_index == "raw_data_aw_y":
+                    data_aw_y_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
+                elif data_aw_keys_index == "raw_data_aw_z":
+                    data_aw_y_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
+    with open('data_an_x' + str(order) + '.txt','a+') as data_an_x_f,open('data_an_y' + str(order) + '.txt','a+') as data_an_y_f,open('data_an_z' + str(order) + '.txt','a+') as data_an_z_f:
+        for data_an_index in ran_data_an:
+            data_an_keys = data_an_index.keys()
+            for data_an_keys_index in data_an_keys:
+                if data_an_keys_index == "ran_data_an_x":
+                    data_an_x_f.write(str(data_an_index[data_an_keys_index]) + " ")
+                elif data_an_keys_index == "ran_data_an_y":
+                    data_an_y_f.write(str(data_an_index[data_an_keys_index]) + " ")
+                elif data_an_keys_index == "ran_data_an_z":
+                    data_an_y_f.write(str(data_an_index[data_an_keys_index]) + " ")
+    '''
     lock.release()
 
 
-t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 12, 1))
-t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB2", 12, 2))
+t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 6, 1))
+# t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 12, 2))
 t1.setDaemon(True)
-t2.setDaemon(True)
+# t2.setDaemon(True)
 t1.start()
-t2.start()
+# t2.start()
 t1.join()
-t2.join()
+# t2.join()
