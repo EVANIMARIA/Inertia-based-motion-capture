@@ -20,7 +20,7 @@ def serial_mode(sensor, count_out, order):
         # print("data_ac" + str(count_index))
         #        count_out = count_out - 1
         for count_index_in in range(1, count):
-            # print("data_ac" + str(count_index_in))
+            # print(order)
             # while (count >= 0):
             flag = ser.read(1)
             flag_data = struct.unpack('<b', flag)
@@ -72,7 +72,7 @@ def serial_mode(sensor, count_out, order):
         for data_aw_f_index in range(len(raw_data_aw)):
             data_aw_f.write(str(raw_data_aw[data_aw_f_index]) + '\n')
     '''
-    with open('data_ac_x' + str(order) + '.txt','a+') as data_ac_x_f,open('data_ac_y' + str(order) + '.txt','a+') as data_ac_y_f,open('data_ac_z' + str(order) + '.txt','a+') as data_ac_z_f:
+    with open('data_ac_x' + str(order) + '.txt','w+') as data_ac_x_f,open('data_ac_y' + str(order) + '.txt','w+') as data_ac_y_f,open('data_ac_z' + str(order) + '.txt','w+') as data_ac_z_f:
         for data_ac_index in raw_data_ac:
             data_ac_keys = data_ac_index.keys()
             for data_ac_keys_index in data_ac_keys:
@@ -81,9 +81,9 @@ def serial_mode(sensor, count_out, order):
                 elif data_ac_keys_index == "raw_data_ac_y":
                     data_ac_y_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
                 elif data_ac_keys_index == "raw_data_ac_z":
-                    data_ac_y_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
-    '''
-    with open('data_aw_x' + str(order) + '.txt','a+') as data_aw_x_f,open('data_aw_y' + str(order) + '.txt','a+') as data_aw_y_f,open('data_aw_z' + str(order) + '.txt','a+') as data_aw_z_f:    with open('data_aw_x' + str(order) + '.txt','a+') as data_aw_x_f,open('data_aw_y' + str(order) + '.txt','a+') as data_aw_y_f,open('data_aw_z' + str(order) + '.txt','a+') as data_aw_z_f:
+                    data_ac_z_f.write(str(data_ac_index[data_ac_keys_index]) + " ")
+    
+    with open('data_aw_x' + str(order) + '.txt','w+') as data_aw_x_f,open('data_aw_y' + str(order) + '.txt','w+') as data_aw_y_f,open('data_aw_z' + str(order) + '.txt','w+') as data_aw_z_f:
         for data_aw_index in raw_data_aw:
             data_aw_keys = data_aw_index.keys()
             for data_aw_keys_index in data_aw_keys:
@@ -92,9 +92,9 @@ def serial_mode(sensor, count_out, order):
                 elif data_aw_keys_index == "raw_data_aw_y":
                     data_aw_y_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
                 elif data_aw_keys_index == "raw_data_aw_z":
-                    data_aw_y_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
-    with open('data_an_x' + str(order) + '.txt','a+') as data_an_x_f,open('data_an_y' + str(order) + '.txt','a+') as data_an_y_f,open('data_an_z' + str(order) + '.txt','a+') as data_an_z_f:
-        for data_an_index in ran_data_an:
+                    data_aw_z_f.write(str(data_aw_index[data_aw_keys_index]) + " ")
+    with open('data_an_x' + str(order) + '.txt','w+') as data_an_x_f,open('data_an_y' + str(order) + '.txt','w+') as data_an_y_f,open('data_an_z' + str(order) + '.txt','w+') as data_an_z_f:
+        for data_an_index in raw_data_an:
             data_an_keys = data_an_index.keys()
             for data_an_keys_index in data_an_keys:
                 if data_an_keys_index == "ran_data_an_x":
@@ -102,12 +102,12 @@ def serial_mode(sensor, count_out, order):
                 elif data_an_keys_index == "ran_data_an_y":
                     data_an_y_f.write(str(data_an_index[data_an_keys_index]) + " ")
                 elif data_an_keys_index == "ran_data_an_z":
-                    data_an_y_f.write(str(data_an_index[data_an_keys_index]) + " ")
-    '''
+                    data_an_z_f.write(str(data_an_index[data_an_keys_index]) + " ")
+    
     lock.release()
 
 
-t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 6, 1))
+t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 6, 3))
 # t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 12, 2))
 t1.setDaemon(True)
 # t2.setDaemon(True)
