@@ -15,12 +15,12 @@ def serial_mode(sensor, count_out, order):
     raw_data_ac = []
     raw_data_aw = []
     raw_data_an = []
-    count = 297
-    for count_index in range(1, count_out):
+    count = 3
+    for count_index in range(count_out):
         # print("data_ac" + str(count_index))
         #        count_out = count_out - 1
-        for count_index_in in range(1, count):
-            # print(order)
+        for count_index_in in range(count):
+            print(order)
             # while (count >= 0):
             flag = ser.read(1)
             flag_data = struct.unpack('<b', flag)
@@ -107,11 +107,11 @@ def serial_mode(sensor, count_out, order):
     lock.release()
 
 
-t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 6, 3))
-# t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 12, 2))
-t1.setDaemon(True)
+t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 3, 1))
+t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 3, 2))
+# t1.setDaemon(True)
 # t2.setDaemon(True)
 t1.start()
-# t2.start()
+t2.start()
 t1.join()
-# t2.join()
+t2.join()
