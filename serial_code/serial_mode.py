@@ -7,7 +7,7 @@ lock = threading.Lock()
 
 
 def serial_mode(sensor, count_out, order):
-    lock.acquire()
+    # lock.acquire()
     ser = serial.Serial(sensor, 115200, timeout=100)
     if not ser.isOpen:
         ser.open()
@@ -15,7 +15,7 @@ def serial_mode(sensor, count_out, order):
     raw_data_ac = []
     raw_data_aw = []
     raw_data_an = []
-    count = 3
+    count = 297
     for count_index in range(count_out):
         # print("data_ac" + str(count_index))
         #        count_out = count_out - 1
@@ -104,7 +104,7 @@ def serial_mode(sensor, count_out, order):
                 elif data_an_keys_index == "ran_data_an_z":
                     data_an_z_f.write(str(data_an_index[data_an_keys_index]) + " ")
     
-    lock.release()
+    # lock.release()
 
 
 t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 3, 1))
