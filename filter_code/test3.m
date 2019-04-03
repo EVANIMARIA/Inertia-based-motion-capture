@@ -1,4 +1,4 @@
-clear
+锘縞lear
 data_ac_y3=load('data_ac_y3.txt');
 data_ac_x3=load('data_ac_x3.txt');
 data_ac_z3=load('data_ac_z3.txt');
@@ -11,33 +11,33 @@ data_ac_z3=load('data_ac_z3.txt');
 data_ac_y3=smooth(data_ac_y3,11);
 % plot(data_ac_x3,'b');hold on;
 % figure
-% fs=100;N=490;   %采样频率和数据点数
-% n=0:N-1;t=n/fs;   %时间序列
-% %x=0.5*sin(2*pi*15*t)+2*sin(2*pi*40*t); %信号
-% y=fft(data_ac_x3,N);    %对信号进行快速Fourier变换
-% mag=abs(y);     %求得Fourier变换后的振幅
-% f=n*fs/N;    %频率序列
-% subplot(1,2,1),plot(f,mag);   %绘出随频率变化的振幅
-% xlabel('频率/Hz');
-% ylabel('振幅');title('N=128');grid on;
-% subplot(1,2,2),plot(f(1:N/2),mag(1:N/2)); %绘出Nyquist频率之前随频率变化的振幅
-% xlabel('频率/Hz');
-% ylabel('振幅');title('N=128');grid on;
+% fs=100;N=490;   %虏脡脩霉脝碌脗脢潞脥脢媒戮脻碌茫脢媒
+% n=0:N-1;t=n/fs;   %脢卤录盲脨貌脕脨
+% %x=0.5*sin(2*pi*15*t)+2*sin(2*pi*40*t); %脨脜潞脜
+% y=fft(data_ac_x3,N);    %露脭脨脜潞脜陆酶脨脨驴矛脣脵Fourier卤盲禄禄
+% mag=abs(y);     %脟贸碌脙Fourier卤盲禄禄潞贸碌脛脮帽路霉
+% f=n*fs/N;    %脝碌脗脢脨貌脕脨
+% subplot(1,2,1),plot(f,mag);   %禄忙鲁枚脣忙脝碌脗脢卤盲禄炉碌脛脮帽路霉
+% xlabel('脝碌脗脢/Hz');
+% ylabel('脮帽路霉');title('N=128');grid on;
+% subplot(1,2,2),plot(f(1:N/2),mag(1:N/2)); %禄忙鲁枚Nyquist脝碌脗脢脰庐脟掳脣忙脝碌脗脢卤盲禄炉碌脛脮帽路霉
+% xlabel('脝碌脗脢/Hz');
+% ylabel('脮帽路霉');title('N=128');grid on;
 
 figure
 plot(data_ac_y3,'b');hold on;
 figure
-fs=100;N=490;   %采样频率和数据点数
-n=0:N-1;t=n/fs;   %时间序列
-%x=0.5*sin(2*pi*15*t)+2*sin(2*pi*40*t); %信号
-y=fft(data_ac_y3,N);    %对信号进行快速Fourier变换
-mag=abs(y);     %求得Fourier变换后的振幅
-f=n*fs/N;    %频率序列
-subplot(1,2,1),plot(f,mag);   %绘出随频率变化的振幅
-xlabel('频率/Hz');
-ylabel('振幅');title('N=128');grid on;
-subplot(1,2,2),plot(f(1:N/2),mag(1:N/2)); %绘出Nyquist频率之前随频率变化的振幅
-xlabel('频率/Hz');
-ylabel('振幅');title('N=128');grid on;
+fs=100;N=490;   %虏脡脩霉脝碌脗脢潞脥脢媒戮脻碌茫脢媒
+n=0:N-1;t=n/fs;   %脢卤录盲脨貌脕脨
+%x=0.5*sin(2*pi*15*t)+2*sin(2*pi*40*t); %脨脜潞脜
+y=fft(data_ac_y3,N);    %露脭脨脜潞脜陆酶脨脨驴矛脣脵Fourier卤盲禄禄
+mag=abs(y);     %脟贸碌脙Fourier卤盲禄禄潞贸碌脛脮帽路霉
+f=n*fs/N;    %脝碌脗脢脨貌脕脨
+subplot(1,2,1),plot(f,mag);   %禄忙鲁枚脣忙脝碌脗脢卤盲禄炉碌脛脮帽路霉
+xlabel('脝碌脗脢/Hz');
+ylabel('脮帽路霉');title('N=128');grid on;
+subplot(1,2,2),plot(f(1:N/2),mag(1:N/2)); %禄忙鲁枚Nyquist脝碌脗脢脰庐脟掳脣忙脝碌脗脢卤盲禄炉碌脛脮帽路霉
+xlabel('脝碌脗脢/Hz');
+ylabel('脮帽路霉');title('N=128');grid on;
 
 
