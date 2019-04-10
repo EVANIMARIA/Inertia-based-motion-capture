@@ -105,8 +105,8 @@ def serial_mode(sensor, count_out, order):
     # lock.release()
 
 
-t1 = threading.Thread(target=serial_mode, args=("com12", 3, 1))
-t2 = threading.Thread(target=serial_mode, args=("com15", 3, 2))
+t1 = threading.Thread(target=serial_mode, args=("com16", 3, 1))
+t2 = threading.Thread(target=serial_mode, args=("com17", 3, 2))
 # t1.setDaemon(True)
 # t2.setDaemon(True)
 t1.start()
