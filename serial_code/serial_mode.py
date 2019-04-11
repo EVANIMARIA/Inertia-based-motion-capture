@@ -59,7 +59,7 @@ def serial_mode(sensor, count_out, order):
                     raw_data_an.append(raw_data_an_unit)
             # count = count - 1
         # time.sleep(1)
-    print("done!")
+    print(str(order)+"done!")
 
     with open('../data/data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
         for data_ac_index in raw_data_ac:
@@ -105,11 +105,17 @@ def serial_mode(sensor, count_out, order):
     # lock.release()
 
 
-t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 6, 1))
-t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 6, 2))
+t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB8", 6, 1))
+t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB6", 6, 2))
+t3 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB9", 6, 3))
+# t4 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB5", 6, 4))
 # t1.setDaemon(True)
 # t2.setDaemon(True)
 t1.start()
 t2.start()
+t3.start()
+# t4.start()
 t1.join()
 t2.join()
+t3.join()
+#t4.join()
