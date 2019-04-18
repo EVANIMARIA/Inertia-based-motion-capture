@@ -59,7 +59,7 @@ def serial_mode(sensor, count_out, order):
                     raw_data_an.append(raw_data_an_unit)
             # count = count - 1
         # time.sleep(1)
-    print(str(order)+"done!")
+    print(str(order) + "done!")
 
     with open('../data/data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
         for data_ac_index in raw_data_ac:
