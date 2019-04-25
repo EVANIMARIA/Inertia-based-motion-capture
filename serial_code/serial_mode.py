@@ -2,12 +2,14 @@ import serial
 import struct
 import threading
 import time
+import random
 
 lock = threading.Lock()
 
 
 def serial_mode(sensor, count_out, order):
     # lock.acquire()
+    stamp = str(random.randint(1000,9999))
     ser = serial.Serial(sensor, 115200, timeout=100)
     if not ser.isOpen:
         ser.open()
@@ -61,7 +63,7 @@ def serial_mode(sensor, count_out, order):
         # time.sleep(1)
     print(str(order) + "done!")
 
-    with open('../data/data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
+    with open('../data/ac/'+stamp+'data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/ac'+stamp+'data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/ac'+stamp+'data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
         for data_ac_index in raw_data_ac:
             data_ac_keys = data_ac_index.keys()
             for data_ac_keys_index in data_ac_keys:
@@ -75,7 +77,7 @@ def serial_mode(sensor, count_out, order):
                     data_ac_z_f.write(
                         str(data_ac_index[data_ac_keys_index]) + " ")
 
-    with open('../data/data_aw_x' + str(order) + '.txt', 'w+') as data_aw_x_f, open('../data/data_aw_y' + str(order) + '.txt', 'w+') as data_aw_y_f, open('../data/data_aw_z' + str(order) + '.txt', 'w+') as data_aw_z_f:
+    with open('../data/aw'+stamp+'data_aw_x' + str(order) + '.txt', 'w+') as data_aw_x_f, open('../data/aw'+stamp+'data_aw_y' + str(order) + '.txt', 'w+') as data_aw_y_f, open('../data/aw'+stamp+'data_aw_z' + str(order) + '.txt', 'w+') as data_aw_z_f:
         for data_aw_index in raw_data_aw:
             data_aw_keys = data_aw_index.keys()
             for data_aw_keys_index in data_aw_keys:
@@ -88,7 +90,7 @@ def serial_mode(sensor, count_out, order):
                 elif data_aw_keys_index == "raw_data_aw_z":
                     data_aw_z_f.write(
                         str(data_aw_index[data_aw_keys_index]) + " ")
-    with open('../data/data_an_x' + str(order) + '.txt', 'w+') as data_an_x_f, open('../data/data_an_y' + str(order) + '.txt', 'w+') as data_an_y_f, open('../data/data_an_z' + str(order) + '.txt', 'w+') as data_an_z_f:
+    with open('../data/an'+stamp+'data_an_x' + str(order) + '.txt', 'w+') as data_an_x_f, open('../data/an'+stamp+'data_an_y' + str(order) + '.txt', 'w+') as data_an_y_f, open('../data/an'+stamp+'data_an_z' + str(order) + '.txt', 'w+') as data_an_z_f:
         for data_an_index in raw_data_an:
             data_an_keys = data_an_index.keys()
             for data_an_keys_index in data_an_keys:
@@ -112,14 +114,14 @@ t2 = threading.Thread(target=serial_mode, args=("com17", 3, 2))
 t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 6, 1))
 t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 6, 2))
 t3 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB2", 6, 3))
-t4 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB3", 6, 4))
+# t4 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB4", 6, 4))
 # t1.setDaemon(True)
 # t2.setDaemon(True)
 t1.start()
 t2.start()
 t3.start()
-t4.start()
+# t4.start()
 t1.join()
 t2.join()
 t3.join()
-t4.join()
+# t4.join()
