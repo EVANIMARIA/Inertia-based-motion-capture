@@ -24,7 +24,7 @@ for dirpath, dirnames, filenames in os.walk(path1):
 dataxy1 = np.array(dataxy1)
 print(dataxy1.shape)
 
-for dirpath, dirnames, filenames in os.walk(path1):
+for dirpath, dirnames, filenames in os.walk(path2):
     for file in filenames:
         fullpath2 = os.path.join(dirpath, file)
         with open(fullpath2) as fp2:
@@ -38,13 +38,25 @@ print(dataxy2.shape)
 
 train1 = dataxy1[10:17, :]
 train2 = dataxy2[10:17, :]
-train = np.append(train1, train2, axis=0)
-group = np.array([1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
+train3 = dataxy1[:7,:]
+train4 = dataxy2[:7,:]
+train_temp = np.append(train1, train3,axis=0)
+train_temp2 = np.append(train2,train4,axis=0)
+train = np.append(train_temp,train_temp2,axis=0)
+'''
+np.savetxt("train.txt",train1)
+np.savetxt("train2.txt",train2)
+'''
+group = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
 
-test = np.append(dataxy1[17:, :], dataxy2[17:, :], axis=0)
-print(test)
+test_temp = np.append(dataxy1[17:, :], dataxy1[7:10, :],axis=0)
+test_temp2 = np.append(dataxy2[17:, :],dataxy2[7:10, :],axis=0)
+test = np.append(test_temp,test_temp2,axis=0)
+'''
+np.savetxt("temp.txt",test)
+'''
 
-clf = svm.SVC(C=0.8, kernel='rbf', gamma=9, decision_function_shape='ovr')
+clf = svm.SVC(C=0.8, kernel='linear', decision_function_shape='ovr')
 clf.fit(train, group)
 result = clf.predict(test)
 print(result)

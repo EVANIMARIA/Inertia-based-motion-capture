@@ -1,7 +1,7 @@
 clear
 file=dir('D:\matlab\bin\SVM\dataxy\*.txt');
 for n=1:length(file)
-D1{n,1}=importdata(['D:\matlab\bin\SVM\dataxy\',file(n).name]);
+    D1{n,1}=importdata(['D:\matlab\bin\SVM\dataxy\',file(n).name]);
 end
 
 A1=cellfun(@mean,D1);
@@ -9,7 +9,7 @@ S1=cellfun(@std,D1);
 
 file=dir('D:\matlab\bin\SVM\dataxy2\*.txt');
 for n=1:length(file)
-D2{n,1}=importdata(['D:\matlab\bin\SVM\dataxy2\',file(n).name]);
+    D2{n,1}=importdata(['D:\matlab\bin\SVM\dataxy2\',file(n).name]);
 end
 
 A2=cellfun(@mean,D2);
@@ -34,7 +34,7 @@ for i=(1:3)
       count=count+1;
    end
 end
-fprintf('分类精度为：%f\n' ,count/3);
+fprintf('锟斤拷锟洁精锟斤拷为锟斤拷%f\n' ,count/3);
 
 
 
