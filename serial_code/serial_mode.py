@@ -61,7 +61,7 @@ def serial_mode(args):
                             ((raw_data_list[6]) << 8) | raw_data_list[5]) / 32768 * 180,
                     )
                     raw_data_an.append(raw_data_an_unit)
-    return raw_data_ac
+    return [raw_data_ac,raw_data_an,raw_data_aw]
             # count = count - 1
         # time.sleep(1)
     # print(str(order) + "done!")
