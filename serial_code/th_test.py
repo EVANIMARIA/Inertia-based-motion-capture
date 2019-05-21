@@ -15,9 +15,9 @@ def dist(args):
 
 if __name__ == '__main__':
     stamp = str(random.randint(1000,9999))
-    ser1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=100)
+    ser1 = serial.Serial("/dev/ttyUSB2", 115200, timeout=100)
     ser2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=100)
-    ser3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=100)
+    ser3 = serial.Serial("/dev/ttyUSB4", 115200, timeout=100)
     pool = ThreadPool(3)
     # result = pool.map(serial_mode,[("/dev/ttyUSB3", 6,1,stamp),("/dev/ttyUSB6", 6, 3,stamp),("/dev/ttyUSB5", 6, 4,stamp)])
     # result = pool.map(m_add,[(1,2),(3,4),(5,6)])
@@ -54,6 +54,6 @@ if __name__ == '__main__':
             else:
                 flag[f] = 'wait'
 
-        print('\r'+'a1:'+str(flag[0])+' a2:'+str(flag[1])+' a3:'+str(flag[2]),end = '')
+        print('\r'+'a1:'+str(flag[0])+' a2:'+str(flag[1])+' a3:'+str(flag[2]),end = '',flush=True)
     pool.close()
     pool.join()

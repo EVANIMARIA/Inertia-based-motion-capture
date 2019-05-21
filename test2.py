@@ -36,7 +36,7 @@ for dirpath, dirnames, filenames in os.walk(path2):
             dataxy2.append(dataxy_n_iter_list)
 dataxy2 = np.array(dataxy2)
 print(dataxy2.shape)
-'''
+
 train1 = dataxy1[10:17, :]
 train2 = dataxy2[10:17, :]
 train3 = dataxy1[:7,:]
@@ -44,18 +44,21 @@ train4 = dataxy2[:7,:]
 train_temp = np.append(train1, train3,axis=0)
 train_temp2 = np.append(train2,train4,axis=0)
 train = np.append(train_temp,train_temp2,axis=0)
-
+'''
 np.savetxt("train.txt",train1)
 np.savetxt("train2.txt",train2)
-
-group = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
 '''
+group = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+
 test_temp = np.append(dataxy1[17:, :], dataxy1[7:10, :],axis=0)
 test_temp2 = np.append(dataxy2[17:, :],dataxy2[7:10, :],axis=0)
 test = np.append(test_temp,test_temp2,axis=0)
 '''
 np.savetxt("temp.txt",test)
 '''
-clf = joblib.load('clf.model')
-result = clf.predict(test)
+
+clf = svm.SVC(C=0.8, kernel='linear', decision_function_shape='ovr')
+clf_result = clf.fit(train, group)
+joblib.dump(clf_result,'clf.model')
+result = clf.predict(test_temp)
 print(result)
