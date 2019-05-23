@@ -3,6 +3,7 @@ import struct
 import threading
 import time
 import random
+from multiprocessing.dummy import Pool as ThreadPool
 
 lock = threading.Lock()
 stamp = str(random.randint(1000,9999))
@@ -61,11 +62,11 @@ def serial_mode(args):
                             ((raw_data_list[6]) << 8) | raw_data_list[5]) / 32768 * 180,
                     )
                     raw_data_an.append(raw_data_an_unit)
-    return [raw_data_ac,raw_data_an,raw_data_aw]
+    # return [raw_data_ac,raw_data_an,raw_data_aw]
             # count = count - 1
         # time.sleep(1)
-    # print(str(order) + "done!")
-'''
+    print(str(order) + "done!")
+
     with open('../data/ac/'+stamp+'data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/ac/'+stamp+'data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/ac/'+stamp+'data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
         for data_ac_index in raw_data_ac:
             data_ac_keys = data_ac_index.keys()
@@ -106,7 +107,7 @@ def serial_mode(args):
                 elif data_an_keys_index == "raw_data_an_z":
                     data_an_z_f.write(
                         str(data_an_index[data_an_keys_index]) + " ")
-'''
+
     # lock.release()
     # return raw_data_ac
 
@@ -116,20 +117,32 @@ if __name__ == '__main__':
     '''
     t1 = threading.Thread(target=serial_mode, args=("com16", 3, 1))
     t2 = threading.Thread(target=serial_mode, args=("com17", 3, 2))
-    '''
-    t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB3", 6,1,stamp))
-    # t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB2", 6, 2,stamp))
-    t3 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB6", 6, 3,stamp))
-    t4 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB5", 6, 4,stamp))
+    
+    t1 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB0", 6, 1,stamp))
+    t2 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB1", 6, 2,stamp))
+    t3 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB2", 6, 3,stamp))
+    t4 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB3", 6, 4,stamp))
+    t5 = threading.Thread(target=serial_mode, args=("/dev/ttyUSB4", 6, 5,stamp))
     # t1.setDaemon(True)
     # t2.setDaemon(True)
     t1.start()
-    # t2.start()
+    t2.start()
     t3.start()
     t4.start()
+    t5.start()
     t1.join()
-    # t2.join()
+    t2.join()
     t3.join()
     t4.join()
-
+    t5.join()
+    '''
+    stamp = str(random.randint(1000,9999))
+    ser1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=100)
+    ser2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=100)
+    ser3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=100)
+    ser4 = serial.Serial("/dev/ttyUSB3", 115200, timeout=100)
+    ser5 = serial.Serial("/dev/ttyUSB4", 115200, timeout=100)
+    pool = ThreadPool(5)
+    cc = 35
+    result = pool.map(serial_mode,[(ser1, cc,1,stamp),(ser2, cc, 2,stamp),(ser3, cc, 3,stamp),(ser4, cc, 4,stamp),(ser5, cc, 5,stamp)])
 

@@ -19,18 +19,19 @@ if __name__ == '__main__':
     ser2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=100)
     ser3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=100)
     ser4 = serial.Serial("/dev/ttyUSB3", 115200, timeout=100)
-    pool = ThreadPool(3)
+    ser5 = serial.Serial("/dev/ttyUSB4", 115200, timeout=100)
+    pool = ThreadPool(5)
     # result = pool.map(serial_mode,[("/dev/ttyUSB3", 6,1,stamp),("/dev/ttyUSB6", 6, 3,stamp),("/dev/ttyUSB5", 6, 4,stamp)])
     # result = pool.map(m_add,[(1,2),(3,4),(5,6)])
     scala_set = deque(maxlen=20)
-    sensor_avr = [0,0,0]
+    sensor_avr = [0,0,0,0,0]
     flag = ['wait','wait','wait','wait']
     while True:
-        result = pool.map(serial_mode,[(ser1, 3,1,stamp),(ser2, 3, 3,stamp),(ser3, 3, 4,stamp),(ser4, 3, 2,stamp)])
+        result = pool.map(serial_mode,[(ser1, 3,1,stamp),(ser2, 3, 3,stamp),(ser3, 3, 4,stamp),(ser4, 3, 2,stamp),(ser5, 3, 5,stamp)])
 
         sensor_scala = []
 
-        for i in range(4):
+        for i in range(5):
             sensor_data = result[i][0][0]
             sensor_scala_temp = 0
             for k,v in sensor_data.items():
@@ -38,10 +39,10 @@ if __name__ == '__main__':
             sensor_scala.append(math.sqrt(sensor_scala_temp))
         scala_set.append(sensor_scala)
         
-        sensor_dist_origin = [0,0,0]
+        sensor_dist_origin = [0,0,0,0,0]
         if len(scala_set) in range(2,21):
             sensor_avr_temp = []
-            for m in range(4):
+            for m in range(5):
                 avr_temp = 0
                 for n in range(len(scala_set)):
                     avr_temp += scala_set[n][m]
@@ -55,6 +56,6 @@ if __name__ == '__main__':
             else:
                 flag[f] = 'wait'
 
-        print('\r'+'a1:'+str(flag[0])+' a2:'+str(flag[1])+' a3:'+str(flag[2])+' a4:'+str(flag[3]),end = '',flush=True)
+        print('\r'+'a1:'+str(flag[0])+' a2:'+str(flag[1])+' a3:'+str(flag[2])+' a4:'+str(flag[3])+' a5:'+str(flag[4]),end = '',flush=True)
     pool.close()
     pool.join()

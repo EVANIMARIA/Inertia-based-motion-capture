@@ -44,15 +44,21 @@ train4 = dataxy2[:7,:]
 train_temp = np.append(train1, train3,axis=0)
 train_temp2 = np.append(train2,train4,axis=0)
 train = np.append(train_temp,train_temp2,axis=0)
+print(train.shape)
+train_mean = np.mean(train,axis=1)
+train_mean = train_mean.reshape(-1,1)
+print(train_mean.shape)
 '''
 np.savetxt("train.txt",train1)
 np.savetxt("train2.txt",train2)
 '''
-group = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+group = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]).reshape(-1,1)
+print(group.shape)
 
 test_temp = np.append(dataxy1[17:, :], dataxy1[7:10, :],axis=0)
 test_temp2 = np.append(dataxy2[17:, :],dataxy2[7:10, :],axis=0)
 test = np.append(test_temp,test_temp2,axis=0)
+test_mean = 
 '''
 np.savetxt("temp.txt",test)
 '''
