@@ -62,9 +62,10 @@ def serial_mode(args):
                             ((raw_data_list[6]) << 8) | raw_data_list[5]) / 32768 * 180,
                     )
                     raw_data_an.append(raw_data_an_unit)
-    # return [raw_data_ac,raw_data_an,raw_data_aw]
+    return [raw_data_ac,raw_data_an,raw_data_aw]
             # count = count - 1
         # time.sleep(1)
+    '''
     print(str(order) + "done!")
 
     with open('../data/ac/'+stamp+'data_ac_x' + str(order) + '.txt', 'w+') as data_ac_x_f, open('../data/ac/'+stamp+'data_ac_y' + str(order) + '.txt', 'w+') as data_ac_y_f, open('../data/ac/'+stamp+'data_ac_z' + str(order) + '.txt', 'w+') as data_ac_z_f:
@@ -110,7 +111,7 @@ def serial_mode(args):
 
     # lock.release()
     # return raw_data_ac
-
+'''
 
 
 if __name__ == '__main__':
