@@ -28,6 +28,10 @@ if __name__ == '__main__':
     sensor_avr = [0, 0, 0, 0, 0]
     # flag = ['wait','wait','wait','wait']
     while True:
+        #m_input = int(input("please input a:"))
+        print("wai")
+        # while m_input == 1:
+        print("nei")
         result = pool.map(serial_mode, [(ser1, 35, 1, stamp), (ser2, 35, 2, stamp), (
             ser3, 35, 3, stamp), (ser4, 35, 4, stamp), (ser5, 35, 5, stamp)])
         # result contains of [different process][different sensor][dict of each time sampling]
@@ -54,6 +58,7 @@ if __name__ == '__main__':
         print(output_mean)
         predicted = model1.predict(output_mean.reshape(-1, 5))
         print(predicted)
+        m_input = 0
         # print('\r'+'a1:'+str(flag[0])+' a2:'+str(flag[1])+' a3:'+str(flag[2])+' a4:'+str(flag[3])+' a5:'+str(flag[4]),end = '',flush=True)
     pool.close()
     pool.join()
